@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interrogatório Concluído</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="carregarRelatorioFinal()">
+    <div id="app" class="final-screen-active" style="justify-content: center; align-items: center; background: rgba(15, 18, 27, 0.95);">
+
+        <div class="final-card">
+            <h1 class="main-final-title">Interrogatório Concluído</h1>
+
+            <div class="modal-content final-layout">
+                <div class="rank-icon-container">
+                    <svg width="120" height="120" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" fill="#0C1B3A" stroke="#448aff" stroke-width="1" stroke-opacity="0.3"/>
+                        <circle cx="50" cy="50" r="32" fill="none" stroke="#448aff" stroke-width="5"/>
+                        <circle cx="50" cy="50" r="20" fill="none" stroke="#448aff" stroke-width="5"/>
+                        <circle cx="50" cy="50" r="7" fill="#448aff"/>
+                    </svg>
+                </div>
+
+                <h2 id="final-rank-title" class="final-title">Raciocínio Afiado</h2>
+                <p class="final-subtitle">Parabéns, Investigador! Você está no caminho certo.</p>
+
+                <div class="final-score-container">
+                    <h3 id="final-score" class="final-score">0</h3>
+                    <span class="final-score-label">PONTOS</span>
+                </div>
+
+                <div class="final-stats-grid">
+                    <div class="final-stat-card acertos">
+                        <img src="img/IconCheck.svg" alt="Check" class="final-stat-icon-img">
+                        <div class="stat-info">
+                            <p id="final-correct" class="final-stat-value">0/10</p>
+                            <p class="final-stat-label">Acertos</p>
+                        </div>
+                    </div>
+
+                    <div class="final-stat-card erros">
+                        <img src="img/IconErro.png" alt="Erro" class="final-stat-icon-img">
+                        <div class="stat-info">
+                            <p id="final-wrong" class="final-stat-value">10/10</p>
+                            <p class="final-stat-label">Erros</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-reiniciar" onclick="reiniciarJogo()" onmouseenter="tocarSom('snd-btn-padrao')">
+                    <img src="img/Retry_icon.png" alt="Retry">
+                    REFAZER INTERROGATÓRIO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="snd-btn-padrao" src="audio/Button Padrão.mp3" preload="auto"></audio>
+    <script src="js/script.js"></script>
+</body>
+</html>

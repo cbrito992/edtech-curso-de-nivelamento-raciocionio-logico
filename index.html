@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interrogatório Lógico - Início</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="screen-start" class="screen active">
+            <header class="top-bar">
+                <img src="img/Header_icon.png" alt="Icon" class="header-icon">
+                <span class="header-title">Interrogatório Lógico</span>
+            </header>
+
+            <main class="start-content">
+                <img src="img/Main_icon.png" alt="Main Icon" class="main-icon">
+                <h2 class="start-subtitle">Treinamento Intensivo</h2>
+                <h1 class="start-title">Interrogatório Lógico</h1>
+
+                <div class="instructions-card">
+                    <div class="card-header">
+                        <img src="img/Info_icon.png" alt="Info" class="info-icon">
+                        <h3>Instruções da Missão</h3>
+                    </div>
+                    <ul class="mission-list">
+                        <li><span class="bullet-dot"></span> Analise 10 declarações de suspeitos.</li>
+                        <li><span class="bullet-dot"></span> Identifique falhas lógicas ou validade de argumentos.</li>
+                        <li><span class="bullet-dot"></span> +10 pontos por acerto, -5 por erro.</li>
+                    </ul>
+                </div>
+
+                <button class="btn-start" onclick="window.location.href='caso01.html'">
+                    INICIAR INTERROGATÓRIO
+                    <img src="img/Play.png" alt="Play" class="play-icon">
+                </button>
+            </main>
+        </div>
+    </div>
+
+        <audio id="snd-btn-padrao" src="audio/Button Padrão.mp3" preload="auto"></audio>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

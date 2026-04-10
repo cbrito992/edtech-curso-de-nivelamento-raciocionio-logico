@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso 08 - Interrogatório Lógico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="top-bar">
+            <img src="img/Header_icon.png" alt="Icon" class="header-icon">
+            <span class="header-title">Interrogatório Lógico</span>
+        </header>
+
+        <div id="screen-game" class="screen active">
+            <div class="game-container">
+
+                <div class="game-col-left">
+                    <div class="case-header-left">
+                        <h2 class="case-number">CASO 08 <span>DE 10</span></h2>
+                        <p class="case-difficulty">Dificuldade: <span class="diff-badge diff-dificil">Difícil</span></p>
+                    </div>
+
+                    <div class="suspect-photo-container">
+                        <img src="img/Foto8.png" alt="Suspeito" class="suspect-img">
+                    </div>
+
+                    <div class="suspect-statement-box">
+                        <h4>DECLARAÇÃO DA SUSPEITA</h4>
+                        <p>"Os agentes notaram queda nas participações nas aulas ao vivo nos últimos dois meses, ao
+                            mesmo tempo em que o número de estudantes com emprego noturno aumentou. A analista Helena
+                            propõe: 'Talvez o horário das aulas seja um obstáculo para esse grupo'."</p>
+                    </div>
+                </div>
+
+                <div class="game-col-right">
+                    <div class="stats-header-right">
+                        <div class="stat-box">
+                            <div class="stat-labels">
+                                <span class="stat-title">Tempo restante</span>
+                                <span class="stat-value timer-value">
+                                    <img src="img/Relogio.png" alt="Relogio" class="icon-micro">
+                                    <span id="timer-display">180s</span>
+                                </span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="time-bar" class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-labels">
+                                <span class="stat-title">Pontuação Investigativa</span>
+                                <span class="stat-value score-value" id="score-display">0 pts</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill score-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-container">
+                        <h3>Análise Investigativa:</h3>
+                        <p class="question-text">Que tipo de raciocínio Helena está usando, e qual é sua característica
+                            central?</p>
+
+                        <div class="options-list" id="options-container">
+                            <div class="option" data-correct="false" onclick="selecionarOpcao(this)">
+                                <span>Dedutivo - ela deriva a conclusão com certeza a partir de premissas
+                                    universais.</span>
+                                <img src="img/IconCheck.png" class="opt-icon correct-icon hidden">
+                                <img src="img/IconErro.png" class="opt-icon wrong-icon hidden">
+                            </div>
+                            <div class="option" data-correct="false" onclick="selecionarOpcao(this)">
+                                <span>Indutivo - ela observa muitos casos e generaliza uma regra.</span>
+                                <img src="img/IconCheck.png" class="opt-icon correct-icon hidden">
+                                <img src="img/IconErro.png" class="opt-icon wrong-icon hidden">
+                            </div>
+                            <div class="option" data-correct="true" onclick="selecionarOpcao(this)">
+                                <span>Abdutivo - ela propõe a hipótese que melhor explica as pistas disponíveis, sem
+                                    certeza garantida.</span>
+                                <img src="img/IconCheck.png" class="opt-icon correct-icon hidden">
+                                <img src="img/IconErro.png" class="opt-icon wrong-icon hidden">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="action-btn" class="btn-game-action" disabled onclick="confirmarResposta()">Confirmar
+                        Resposta</button>
+
+                    <div id="feedback-area" class="hidden">
+                        <div id="feedback-box" class="feedback-result-box">
+                            <div class="feedback-header">
+                                <img id="feedback-icon" src="" alt="Icon" class="icon-small">
+                                <span id="feedback-title"></span>
+                            </div>
+                            <div id="feedback-points" class="feedback-points"></div>
+                        </div>
+
+                        <div class="explanation-box">
+                            <div class="explanation-header">
+                                <img src="img/Lamp_icon.png" alt="Lâmpada" class="icon-small">
+                                <span>Explicação</span>
+                            </div>
+                            <p id="explanation-text">O raciocínio abdutivo é exatamente a "inferência para a melhor
+                                explicação": dadas as pistas disponíveis, qual hipótese as explicaria melhor? Helena não
+                                tem certeza, mas a hipótese é razoável e pode ser investigada.</p>
+
+                            <button id="btn-inner-estudo" class="btn-estudo hidden" onclick="abrirEstudo()">Ver estudo
+                                de caso</button>
+                        </div>
+
+                        <button id="next-action-btn" class="btn-next btn-yellow" onclick="acaoAposResposta()">
+                            <span id="next-btn-text">Próxima Pergunta</span>
+                            <img id="next-btn-icon" src="img/Next.png" alt=">" class="icon-small"> </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="modal-estudo" class="modal-overlay hidden">
+            <div class="modal-content study-case-layout">
+                <button class="close-modal" onclick="fecharModal()">✕</button>
+
+                <h2 class="modal-title-yellow">ESTUDO DE CASO</h2>
+
+                <div id="modal-text-content" class="modal-text-content">
+                    <p class="study-description">
+                        O raciocínio abdutivo é exatamente a "inferência para a melhor explicação": dadas as pistas
+                        disponíveis, qual hipótese as explicaria melhor? Helena não tem certeza, mas a hipótese é
+                        razoável e pode ser investigada.
+                    </p>
+                    <p class="study-tip">
+                        <strong>Dica:</strong> A abdução é o raciocínio clássico de detetives (como Sherlock Holmes) e
+                        médicos! Trata-se de buscar a causa mais provável para um efeito observado, criando uma hipótese
+                        de investigação.
+                    </p>
+                </div>
+
+                <button id="btn-watch-video" class="btn-video-watch"
+                    onclick="abrirIframeVideo('https://www.youtube.com/embed/yBTYjPaedog?si=beO-WkyDkXeWu50L')" onmouseenter="tocarSom('snd-btn-padrao')">
+                    ASSISTIR VÍDEO <span style="font-size: 12px; margin-left: 8px;">▶</span>
+                </button>
+
+                <div id="video-iframe-container" class="video-wrapper hidden">
+                    <iframe id="video-iframe" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <audio id="snd-btn-padrao" src="audio/Button Padrão.mp3" preload="auto"></audio>
+    <audio id="snd-btn-fechar" src="audio/Button info-fechar.mp3" preload="auto"></audio>
+    <audio id="snd-correct" src="audio/Correct_remix.mp3" preload="auto"></audio>
+    <audio id="snd-incorrect" src="audio/Incorrect_remix.mp3" preload="auto"></audio>
+
+    <script src="js/script.js"></script>
+    <script>
+        // CONFIGURAÇÃO DA PRÓXIMA PÁGINA
+        const configCaso = { proximaPagina: 'caso09.html' };
+    </script>
+</body>
+
+</html>
