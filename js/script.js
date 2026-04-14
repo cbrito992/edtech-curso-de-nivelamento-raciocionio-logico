@@ -126,7 +126,8 @@ function confirmarResposta() {
         if (innerEstudoBtn) innerEstudoBtn.classList.add('hidden');
     } else {
         tocarSom('snd-incorrect');
-        score -= 5;
+        // TRAVA ANTI-NEGATIVO APLICADA
+        score = Math.max(0, score - 5);
         box.className = "feedback-result-box wrong";
         title.innerText = "Análise incorreta!";
         icon.src = "img/Analise incorreta_icon.png";
@@ -143,7 +144,8 @@ function tempoEsgotado() {
     if (jaRespondeu) return;
     tocarSom('snd-incorrect');
     jaRespondeu = true;
-    score -= 5;
+    // TRAVA ANTI-NEGATIVO APLICADA
+    score = Math.max(0, score - 5);
     sessionStorage.setItem('game_score', score);
     atualizarPlacarETempo();
 
@@ -215,11 +217,12 @@ function fecharModal() {
 
 // --- FUNÇÕES DA TELA FINAL ---
 function carregarRelatorioFinal() {
-    const finalScore = parseInt(sessionStorage.getItem('game_score')) || 0;
+    const finalScore = Math.max(0, parseInt(sessionStorage.getItem('game_score')) || 0);
     const finalCorrect = parseInt(sessionStorage.getItem('correct_count')) || 0;
     const finalWrong = 10 - finalCorrect;
 
     const uiTitle = document.getElementById('final-rank-title');
+    const uiSubtitle = document.getElementById('final-subtitle') || document.querySelector('.final-subtitle');
     const uiScore = document.getElementById('final-score');
     const uiCorrect = document.getElementById('final-correct');
     const uiWrong = document.getElementById('final-wrong');
@@ -228,14 +231,32 @@ function carregarRelatorioFinal() {
     if(uiCorrect) uiCorrect.innerText = finalCorrect + "/10";
     if(uiWrong) uiWrong.innerText = finalWrong + "/10";
 
+    // 1. Define o Rank baseado no número de acertos
     let rank = "";
     if (finalCorrect <= 2) rank = "Detetive Aprendiz";
     else if (finalCorrect <= 4) rank = "Detetive Júnior";
     else if (finalCorrect <= 6) rank = "Detetive Pleno";
-    else if (finalCorrect <= 8) rank = "Detetive Senior";
+    else if (finalCorrect <= 8) rank = "Detetive Sênior";
     else rank = "Detetive Mestre";
 
-    if(uiTitle) uiTitle.innerText = rank;
+    // O título principal SEMPRE será o Rank
+    if (uiTitle) {
+        uiTitle.innerText = rank;
+        uiTitle.style.color = "#448aff";
+    }
+
+    // 2. LÓGICA DINÂMICA DA MENSAGEM (Centralizado e Branco)
+    if (uiSubtitle) {
+        uiSubtitle.style.textAlign = "center"; // Força o alinhamento no meio
+
+        if (finalCorrect <= 4) {
+            uiSubtitle.innerText = "Não desanime! Revise os conceitos básicos e tente novamente.";
+            uiSubtitle.style.color = "#A8BDD8"; // Cor neutra para mensagens de erro
+        } else {
+            uiSubtitle.innerText = "Parabéns, Investigador! Você está no caminho certo e demonstrou um bom faro para mentiras.";
+            uiSubtitle.style.color = "#ffffff"; // BRANCO para a mensagem de sucesso
+        }
+    }
 }
 
 function reiniciarJogo() {
